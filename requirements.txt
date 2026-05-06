@@ -1,0 +1,7 @@
+ipykernel
+matplotlib
+networkx
+numpy
+pandas
+scipy
+statsmodels
