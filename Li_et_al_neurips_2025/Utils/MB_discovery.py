@@ -285,7 +285,6 @@ def fast_iamb(
     ]
 
     while active:
-        previous_mb = tuple(mb)
         ranked = sorted(
             active,
             key=lambda variable: (
@@ -295,15 +294,13 @@ def fast_iamb(
         )
 
         for variable in ranked:
-            if variable in mb:
-                continue
             if max_k is not None and len(mb) >= max_k:
                 break
             if sample_size - len(mb) - 3 <= min_df:
                 break
-            if _dependent(df, target, variable, mb, alpha, tracker):
-                mb.append(variable)
+            mb.append(variable)
 
+        previous_mb = tuple(mb)
         # Shrink phase: remove variables rendered independent by the rest of MB.
         for variable in mb.copy():
             conditioning = [member for member in mb if member != variable]
